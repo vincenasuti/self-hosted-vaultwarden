@@ -1,0 +1,39 @@
+# ============================================================
+# Vaultwarden Automated Encrypted Backup
+# systemd Service Configuration
+#
+# Executes the Vaultwarden backup script using a
+# non-root Linux user.
+#
+# Replace example paths and usernames before deployment.
+# ============================================================
+
+[Unit]
+Description=Vaultwarden Encrypted Google Drive Backup
+Wants=network-online.target
+After=network-online.target docker.service
+
+# Limit excessive restart attempts
+StartLimitIntervalSec=30min
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+
+# Run as a non-root user
+User=exampleuser
+Group=exampleuser
+
+# Environment configuration
+Environment=HOME=/home/exampleuser
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+
+# Execute the backup script
+ExecStart=/home/exampleuser/docker/vaultwarden/backup.sh
+
+# Maximum execution time: 30 minutes
+TimeoutStartSec=1800
+
+# Retry failed backups after five minutes
+Restart=on-failure
+RestartSec=5min

@@ -1,0 +1,45 @@
+# ==========================================
+# Self-Hosted Vaultwarden
+# Docker Compose Configuration
+# ==========================================
+#
+# Description:
+# Deploys Vaultwarden as a Docker container
+# with persistent storage and secure access
+# through Cloudflare Tunnel.
+#
+# This is a sanitized example of the
+# production configuration.
+#
+# Replace example values before deployment.
+# Do not commit credentials or vault data.
+# ==========================================
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+
+    # Automatically restart unless manually stopped
+    restart: unless-stopped
+
+    environment:
+      # Public HTTPS address of Vaultwarden
+      DOMAIN: "https://vault.example.com"
+
+      # Disable public account registration
+      SIGNUPS_ALLOWED: "false"
+
+    # Persist application data outside the container
+    volumes:
+      - ./data:/data
+
+    # Connect to the existing Docker network
+    # shared with the Cloudflare Tunnel container
+    networks:
+      - portfolio-network
+
+networks:
+  portfolio-network:
+    # Network is managed outside this Compose project
+    external: true

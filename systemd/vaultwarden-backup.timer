@@ -1,0 +1,23 @@
+# ============================================================
+# Vaultwarden Automated Backup
+# systemd Timer Configuration
+#
+# Executes the backup service daily at 3:00 AM.
+# ============================================================
+
+[Unit]
+Description=Daily Vaultwarden Backup Timer
+
+[Timer]
+
+# Run daily at 3:00 AM (server local time)
+OnCalendar=*-*-* 03:00:00
+
+# Execute a missed backup when the timer becomes active
+Persistent=true
+
+# Service executed by this timer
+Unit=vaultwarden-backup.service
+
+[Install]
+WantedBy=timers.target

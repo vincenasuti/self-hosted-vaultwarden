@@ -1,0 +1,61 @@
+# ==========================================
+# Self-Hosted Vaultwarden
+# Git Ignore Configuration
+# ==========================================
+
+# Vaultwarden application data
+data/
+db.sqlite3
+db.sqlite3-shm
+db.sqlite3-wal
+
+# Backup directories and archives
+backups/
+*.backup
+*.bak
+*.tar
+*.tar.gz
+*.zip
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.secret
+*.key
+*.pem
+
+# Restic credentials and repositories
+restic-password
+vaultwarden-password
+restic-repository/
+.config/restic/
+
+# Rclone authentication
+rclone.conf
+.config/rclone/
+
+# Cloudflare credentials
+cert.pem
+credentials.json
+*.json
+!package.json
+!package-lock.json
+
+# SSH private keys
+id_rsa
+id_ed25519
+id_ecdsa
+
+# macOS files
+.DS_Store
+.AppleDouble
+
+# VS Code local settings
+.vscode/
+
+# Temporary files
+*.tmp
+*.log
+*.swp
+*~
